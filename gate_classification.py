@@ -14,7 +14,7 @@ class gate_classification(nn.Module):
         self.lenear3 = nn.Linear(256,128)
         self.lenear4 = nn.Linear(128,64)
         self.lenear5 = nn.Linear(64,16)
-        self.lenear6 = nn.Linear(16,4)
+        self.lenear6 = nn.Linear(16,5)
 
     def forward(self,x):
 
@@ -60,8 +60,8 @@ x_plot = []
 yl_plot = []
 ya_plot = []
 
-train_data_file = "RandomBinaryClassification\dataset\\train_dataset"
-valid_data_file =  "RandomBinaryClassification\dataset\\train_dataset"
+train_data_file = "RandomBinaryClassification\dataset\\train_dataset.pt"
+valid_data_file =  "RandomBinaryClassification\dataset\\train_dataset.pt"
 train_dataset =  torch.load(train_data_file,weights_only=False)
 valid_dataset = torch.load(valid_data_file,weights_only=False)
 
@@ -69,9 +69,12 @@ train_loader = data.DataLoader(train_dataset, batch_size=batch_size, shuffle=Tru
 valid_loader = data.DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
 epochs = 50
 
+print(f"Training samples: {len(train_dataset)}")
+print(f"Validation samples: {len(valid_dataset)}")
+
 model = gate_classification().to(device)
 loss_func = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=1e-6)
+optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
 
 for epoch in range(1,epochs+1):
