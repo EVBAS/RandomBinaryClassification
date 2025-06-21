@@ -5,8 +5,7 @@ from torch.utils import data
 import numpy as np
 from matplotlib import pyplot as plt
 
-class gate_classification(nn.Module):  #神經網絡架構(好直接的方式)
-
+class gate_classification(nn.Module):
     def __init__(self):
         
         super().__init__()
@@ -27,11 +26,11 @@ class gate_classification(nn.Module):  #神經網絡架構(好直接的方式)
         x = self.lenear6(x)
         return x
     
-def get_dataloder(train_dataset, valid_dataset, batch_size):  #加載數據集
+def get_dataloder(train_dataset, valid_dataset, batch_size):
 
     return data.DataLoader(train_dataset, batch_size= batch_size, shuffle=True),data.DataLoader(valid_dataset, batch_size= batch_size * 2)
 
-def loss_batch(model, loss_func, xb, yb, optimizer=None, device=None):  #應用模型以及計算loss, accuracy
+def loss_batch(model, loss_func, xb, yb, optimizer=None, device=None): 
 
     if device is not None:
 
@@ -39,7 +38,7 @@ def loss_batch(model, loss_func, xb, yb, optimizer=None, device=None):  #應用�
 
     pre_y = model(xb)
     loss = loss_func(pre_y,yb)
-    accuracy = (torch.argmax(pre_y,dim=1)==yb).float().mean().cpu() #令人嘔血的東西
+    accuracy = (torch.argmax(pre_y,dim=1)==yb).float().mean().cpu()
 
     if optimizer is not None:
 
@@ -61,8 +60,8 @@ x_plot = []
 yl_plot = []
 ya_plot = []
 
-train_data_file = "MGAs_algorithm\dataset\\train_dataset"
-valid_data_file =  "MGAs_algorithm\dataset\\train_dataset"
+train_data_file = "RandomBinaryClassification\dataset\\train_dataset"
+valid_data_file =  "RandomBinaryClassification\dataset\\train_dataset"
 train_dataset =  torch.load(train_data_file,weights_only=False)
 valid_dataset = torch.load(valid_data_file,weights_only=False)
 
@@ -75,7 +74,7 @@ loss_func = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=1e-6)
 
 
-for epoch in range(1,epochs+1):  #訓練模型
+for epoch in range(1,epochs+1):
 
     model.train()
 
@@ -91,7 +90,7 @@ for epoch in range(1,epochs+1):  #訓練模型
 
     print(f"epoch: {epoch}, val_loss: {val_loss}, val_accuracy: {val_accuracy}")
 
-    x_plot.append(epoch)  #懶了
+    x_plot.append(epoch) 
     yl_plot.append(val_loss)
     ya_plot.append(val_accuracy)
 

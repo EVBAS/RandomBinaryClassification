@@ -27,9 +27,9 @@ def pack_dataset(filename,target_path,dataset):
     torch.save(dataset, target_path + "\\"+ filename)
     print(f"your dataset saved to {filename}")
 
-file_names = ["MGAs_algorithm\data\\random_binary_array1.bin",
-              "MGAs_algorithm\data\\random_binary_array2.bin",
-              "MGAs_algorithm\data\\random_binary_array4.bin"]
+file_names = ["RandomBinaryClassification\data\\random_binary_array1.bin",
+              "RandomBinaryClassification\data\\random_binary_array2.bin",
+              "RandomBinaryClassification\data\\random_binary_array4.bin"]
 all_groups = []
 all_labels = []
 
